@@ -1,0 +1,6 @@
+wwwroot\uploads\covers\cover_6002_Screenshot 2026-03-31 210624.png
+wwwroot\uploads\pdfs\pdf_6002_Ami Ebong Koyekti Projapoti By Humayun Ahmed (BDeBooks.Com).pdf
+wwwroot\uploads\covers\cover_6003_Screenshot 2026-03-31 212307.png
+wwwroot\uploads\pdfs\pdf_6003_evolution-of-physics-einstein-1938.pdf
+wwwroot\uploads\covers\cover_6004_Screenshot 2026-03-31 210624.png
+wwwroot\uploads\pdfs\pdf_6004_Ami Ebong Koyekti Projapoti By Humayun Ahmed (BDeBooks.Com).pdf
