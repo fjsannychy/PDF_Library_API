@@ -320,6 +320,16 @@
   },
   {
     "ContainingType": "PDFLibrary.Controllers.BooksController",
+    "Method": "GetPurchasedBooks",
+    "RelativePath": "api/Books/purchased",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PDFLibrary.Controllers.BooksController",
     "Method": "GetAll",
     "RelativePath": "api/Books/search",
     "HttpMethod": "POST",
@@ -521,6 +531,32 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "PDFLibrary.Controllers.UserFavouriteController",
+    "Method": "GetMyFavourites",
+    "RelativePath": "api/UserFavourite/my-favourites",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PDFLibrary.Controllers.UserFavouriteController",
+    "Method": "ToggleFavourite",
+    "RelativePath": "api/UserFavourite/toggle",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "PDFLibrary.Models.DTOs.FavouriteDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "PDFLibrary.Controllers.UserMarksController",
     "Method": "Create",
     "RelativePath": "api/UserMarks",
@@ -593,33 +629,6 @@
       }
     ],
     "ReturnTypes": []
-  },
-  {
-    "ContainingType": "PDFLibrary.Controllers.UsersController",
-    "Method": "SendVerificationEmail",
-    "RelativePath": "api/Users",
-    "HttpMethod": "",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "toEmail",
-        "Type": "System.String",
-        "IsRequired": false
-      },
-      {
-        "Name": "token",
-        "Type": "System.String",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "System.Void",
-        "MediaTypes": [],
-        "StatusCode": 200
-      }
-    ]
   },
   {
     "ContainingType": "PDFLibrary.Controllers.UsersController",
@@ -704,6 +713,16 @@
         "IsRequired": true
       }
     ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "PDFLibrary.Controllers.UsersController",
+    "Method": "GetProfile",
+    "RelativePath": "api/Users/profile",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
     "ReturnTypes": []
   },
   {

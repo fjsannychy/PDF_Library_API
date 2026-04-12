@@ -1,6 +1,14 @@
 wwwroot\uploads\covers\cover_6002_Screenshot 2026-03-31 210624.png
-wwwroot\uploads\pdfs\pdf_6002_Ami Ebong Koyekti Projapoti By Humayun Ahmed (BDeBooks.Com).pdf
 wwwroot\uploads\covers\cover_6003_Screenshot 2026-03-31 212307.png
-wwwroot\uploads\pdfs\pdf_6003_evolution-of-physics-einstein-1938.pdf
 wwwroot\uploads\covers\cover_6004_Screenshot 2026-03-31 210624.png
+wwwroot\uploads\pdfs\pdf_6002_Ami Ebong Koyekti Projapoti By Humayun Ahmed (BDeBooks.Com).pdf
+wwwroot\uploads\pdfs\pdf_6003_evolution-of-physics-einstein-1938.pdf
 wwwroot\uploads\pdfs\pdf_6004_Ami Ebong Koyekti Projapoti By Humayun Ahmed (BDeBooks.Com).pdf
+wwwroot\uploads\covers\cover_8004_Screenshot 2026-03-31 212307.png
+wwwroot\uploads\pdfs\pdf_8004_evolution-of-physics-einstein-1938.pdf
+wwwroot\uploads\covers\2574ffa1-250c-44df-8452-00e49e4646bf_Screenshot 2026-04-12 130123.png
+wwwroot\uploads\pdfs\8b17b58b-c317-4511-9735-8e4825e9440d_সমুদ্র-বিলাস.pdf
+wwwroot\uploads\covers\24194ba5-4767-441e-acb3-d4eeba92c85a_Screenshot 2026-04-12 154212.png
+wwwroot\uploads\pdfs\5bc0bc69-6455-4eb1-a603-968973eaf262_MentalHealthGuidebookCovid19.pdf
+wwwroot\uploads\covers\fa1a2d61-7d96-4b2a-9e00-b8de6e954aa9_Screenshot 2026-04-12 160759.png
+wwwroot\uploads\pdfs\29adc839-3eaf-47fd-b3e5-857dd01ba8ab_Gulliver's-Travels.pdf

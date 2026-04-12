@@ -35,7 +35,58 @@ namespace PDFLibrary.Controllers
             _settings = settings.Value;
         }
 
+        [HttpGet("profile")]
+        [Authorize]
+        public async Task<IActionResult> GetProfile()
+        {
+            // Extract ID from JWT claims
+            var userIdClaim = User.FindFirst("Id")?.Value;
+            if (userIdClaim == null) return Unauthorized();
+            int userId = int.Parse(userIdClaim);
 
+            using var connection = _context.CreateConnection();
+
+            // 1. Fetch Basic User Info
+            var userSql = "SELECT Id, Username, Fullname, Role FROM users WHERE Id = @Id";
+            var profile = await connection.QueryFirstOrDefaultAsync<UserProfileViewModel>(userSql, new { Id = userId });
+
+            if (profile == null) return NotFound("User not found");
+
+            // 2. Fetch Favorites
+            var favoritesSql = @"
+        SELECT b.Id, b.Title, b.CoverPhotoUrl, a.Name as Author
+        FROM Books b
+        INNER JOIN UserFavourites uf ON b.Id = uf.BookId
+        INNER JOIN Authors a ON b.AuthorId = a.Id
+        WHERE uf.UserId = @UserId";
+
+            profile.Favorites = (await connection.QueryAsync<UserActivityViewModel>(favoritesSql, new { UserId = userId })).ToList();
+
+            // ★ 3. NEW: Fetch Purchased Books (ActionType 2)
+            var purchasedSql = @"
+        SELECT DISTINCT b.Id, b.Title, b.CoverPhotoUrl, a.Name as Author
+        FROM Books b
+        INNER JOIN UserActions ua ON b.Id = ua.BookId
+        INNER JOIN Authors a ON b.AuthorId = a.Id
+        WHERE ua.UserId = @UserId AND ua.ActionType = 2
+        ORDER BY b.Id DESC";
+
+            profile.PurchasedBooks = (await connection.QueryAsync<BookListItemViewModel>(purchasedSql, new { UserId = userId })).ToList();
+
+            // 4. Fetch Recent Activity (Views/General Actions)
+            var activitySql = @"
+        SELECT TOP 5 b.Id, b.Title, b.CoverPhotoUrl, a.Name as Author
+        FROM Books b
+        INNER JOIN UserActions ua ON b.Id = ua.BookId
+        INNER JOIN Authors a ON b.AuthorId = a.Id
+        WHERE ua.UserId = @UserId 
+        GROUP BY b.Id, b.Title, b.CoverPhotoUrl, a.Name
+        ORDER BY MAX(ua.ActionTime) DESC";
+
+            profile.RecentActivity = (await connection.QueryAsync<UserActivityViewModel>(activitySql, new { UserId = userId })).ToList();
+
+            return Ok(profile);
+        }
         [HttpPost("login")]
         [AllowAnonymous]
         public async Task<IActionResult> LoginAsync(LoginRequest request)
@@ -157,6 +208,7 @@ namespace PDFLibrary.Controllers
                 refreshToken = newRefreshToken.Token
             });
         }
+
 
         [HttpPost("logout")]
         [AllowAnonymous]
@@ -371,7 +423,7 @@ namespace PDFLibrary.Controllers
             return sr.ReadToEnd();
         }
 
-
+        [NonAction]
         public async Task SendVerificationEmail(string toEmail, string token)
         {
             token = WebUtility.UrlEncode(token);

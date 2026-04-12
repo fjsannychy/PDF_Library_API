@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\AspDotNetCoreProject\\PdfLibraryApi\\PDF_Library_API\\PDFLibrary\\PDFLibrary.csproj": {}
+    "D:\\AspDotNetCoreProject\\OnlinePdfLibraryApi\\PDF_Library_API\\PDFLibrary\\PDFLibrary.csproj": {}
   },
   "projects": {
-    "D:\\AspDotNetCoreProject\\PdfLibraryApi\\PDF_Library_API\\PDFLibrary\\PDFLibrary.csproj": {
+    "D:\\AspDotNetCoreProject\\OnlinePdfLibraryApi\\PDF_Library_API\\PDFLibrary\\PDFLibrary.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\AspDotNetCoreProject\\PdfLibraryApi\\PDF_Library_API\\PDFLibrary\\PDFLibrary.csproj",
+        "projectUniqueName": "D:\\AspDotNetCoreProject\\OnlinePdfLibraryApi\\PDF_Library_API\\PDFLibrary\\PDFLibrary.csproj",
         "projectName": "PDFLibrary",
-        "projectPath": "D:\\AspDotNetCoreProject\\PdfLibraryApi\\PDF_Library_API\\PDFLibrary\\PDFLibrary.csproj",
+        "projectPath": "D:\\AspDotNetCoreProject\\OnlinePdfLibraryApi\\PDF_Library_API\\PDFLibrary\\PDFLibrary.csproj",
         "packagesPath": "C:\\Users\\Asus\\.nuget\\packages\\",
-        "outputPath": "D:\\AspDotNetCoreProject\\PdfLibraryApi\\PDF_Library_API\\PDFLibrary\\obj\\",
+        "outputPath": "D:\\AspDotNetCoreProject\\OnlinePdfLibraryApi\\PDF_Library_API\\PDFLibrary\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

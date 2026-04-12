@@ -36,5 +36,7 @@ namespace PDFLibrary.Models.ViewModels
         public string RegisteredUser { get; set; }
         public List<string> Features { get; set; }
         public List<BookAttachment> BookAttachments { get; set; } = new List<BookAttachment>();
+        public bool IsFavourited { get; set; }
+        public bool IsPaid { get; set; }
     }
 }
