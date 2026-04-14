@@ -27,82 +27,88 @@ namespace PDFLibrary.Controllers
         [HttpPost("search")]
         public async Task<IActionResult> GetAll([FromBody] BookFilter filter)
         {
-            var userIdClaim = _httpContextAccessor.HttpContext?.User.FindFirst("Id")?.Value;
-            if (string.IsNullOrEmpty(userIdClaim)) return Unauthorized();
-            int userId = int.Parse(userIdClaim);
+            var userId = int.Parse(_httpContextAccessor.HttpContext?.User.FindFirst("Id").Value);
+
 
             using var connection = _context.CreateConnection();
-            var sql = $@"
-                    declare @UserMode int = (select 
+
+            var sql = $@"declare @UserMode int = (select 
                                               case when role = 'General' then 0 else 1 end 
                                              from users where Id = @UserId
                                              );
-                    With 
-                    UserData as
-                    (
-                    select 
-                    isnull(uf.BookId,isnull(up.BookId,isnull(uar.BookId,isnull(uao.BookId,uav.BookId)))) BookId,
-                    (Sum(Case when uf.UserId is null then 0 else 5 end) + 
-                     Sum(Case when  up.UserId is null then 0 else 4 end) + 
-                     Sum(Case when  uar.UserId is null then 0 else 3 end) +
-                     Sum(Case when  uao.UserId is null then 0 else 2 end) +
-                     Sum(Case when  uav.UserId is null then 0 else 1 end)) Points 
-                    FROM Users u 
-                    left join UserActions uar on uar.UserId = u.Id and uar.ActionType = 2
-                    left join UserActions uao on uao.UserId = u.Id and uao.ActionType = 1
-                    left join UserActions uav on uav.UserId = u.Id and uav.ActionType = 0
-                    left join UserFavourites uf on uf.UserId = u.Id  
-                    left join UserPayments up on up.UserId = u.Id                
-                    where u.Id = @UserId 
-                    {(filter.FilterType == FilterType.Recommended ?
-                      @"and (uf.BookId is not null or 
-                            up.BookId is not null or
-                            uar.BookId is not null or
-                            uao.BookId is not null or
-                            uav.BookId is not null)"
-                      : filter.FilterType == FilterType.Favorites ?
-                        @"and uf.BookId is not null"
-                        : @"and (uf.BookId is not null or
-                            up.BookId is not null )"
-                     )}
-                    group by isnull(uf.BookId,isnull(up.BookId,isnull(uar.BookId,isnull(uao.BookId,uav.BookId))))
+
+                    WITH UserPoints AS (
+                        SELECT 
+                            BookId,
+                            SUM(Points) as TotalPoints
+                        FROM (
+                            SELECT BookId, 5 as Points FROM UserFavourites WHERE UserId = @UserId
+                            UNION ALL
+                            SELECT BookId, 4 FROM UserPayments WHERE UserId = @UserId
+                            UNION ALL
+                            SELECT BookId, 3 FROM UserActions WHERE UserId = @UserId AND ActionType = 2
+                            UNION ALL
+                            SELECT BookId, 2 FROM UserActions WHERE UserId = @UserId AND ActionType = 1
+                            UNION ALL
+                            SELECT BookId, 1 FROM UserActions WHERE UserId = @UserId AND ActionType = 0
+                        ) t
+                        GROUP BY BookId
+                    ),
+                    UserBooks as (
+                            SELECT distinct BookId FROM UserFavourites WHERE UserId = @UserId
+                            {(filter.FilterType == FilterType.Self ?
+                            @"UNION ALL
+                            SELECT distinct BookId FROM UserPayments WHERE UserId = @UserId" :
+                            "")}
+                        ),
+                    CategoryScores AS (
+                        SELECT b.CategoryId, SUM(up.TotalPoints) as CatPoints 
+                        FROM UserPoints up JOIN Books b ON up.BookId = b.Id GROUP BY b.CategoryId
+                    ),
+                    AuthorScores AS (
+                        SELECT b.AuthorId, SUM(up.TotalPoints) as AuthPoints 
+                        FROM UserPoints up JOIN Books b ON up.BookId = b.Id GROUP BY b.AuthorId
+                    ),
+                    PublisherScores AS (
+                        SELECT b.PublisherId, SUM(up.TotalPoints) as PubPoints 
+                        FROM UserPoints up JOIN Books b ON up.BookId = b.Id GROUP BY b.PublisherId
                     )
+
                     SELECT 
-                           b.[Id], b.[Title], b.[Price], b.[DiscountPercent], b.[PriceBeforeDiscount],
-                           b.[CategoryId], b.[PublisherId], b.[AuthorId], b.[Edition], b.[Volume],
-                           b.[ShortDescription], b.[Details], b.[CoverPhotoUrl], b.[PdfUrl],
-                           b.[PublishDate], b.[RegisterDate], b.[RegisteredBy], b.[Status],
-                           p.Name AS Publisher, a.Name AS Author, c.Name AS Category, u.FullName AS RegisteredUser,
-                           STRING_AGG(bf.Title, ', ') AS Features
+                        b.[Id], b.[Title], b.[Price], b.[DiscountPercent], b.[PriceBeforeDiscount],
+                        b.[CategoryId], b.[PublisherId], b.[AuthorId], b.[Edition], b.[Volume],
+                        b.[ShortDescription], b.[Details], b.[CoverPhotoUrl], b.[PdfUrl],
+                        b.[PublishDate], b.[RegisterDate], b.[RegisteredBy], b.[Status],
+                        p.Name AS Publisher,
+                        a.Name AS Author,
+                        c.Name AS Category,
+                        u.FullName AS RegisteredUser,
+                        (SELECT STRING_AGG(bf.Title, ', ') FROM BookFeatures bf WHERE bf.BookId = b.Id) AS Features
                     FROM Books b
-                    Left JOIN BookFeatures bf ON bf.BookId = b.Id
-                    Left JOIN BookFeatures bfb ON bfb.Title = bf.Title
                     INNER JOIN Publishers p ON p.Id = b.PublisherId
-                    Left JOIN Books pb ON pb.PublisherId = p.Id
                     INNER JOIN Authors a ON a.Id = b.AuthorId
-                    Left JOIN Books ab ON ab.AuthorId = a.Id
                     INNER JOIN Categories c ON c.Id = b.CategoryId
-                    Left JOIN Books cb ON cb.CategoryId = c.Id
                     INNER JOIN Users u ON u.Id = b.RegisteredBy
-                    {(filter.FilterType == FilterType.Recommended ? "Left" : "Inner")} JOIN UserData udb ON udb.BookId = b.Id
-                    Left JOIN UserData udb_p ON udb_p.BookId = pb.Id
-                    Left JOIN UserData udb_a ON udb_a.BookId = ab.Id
-                    Left JOIN UserData udb_c ON udb_c.BookId = cb.Id
-                    Left JOIN UserData udb_f ON udb_f.BookId = bfb.BookId
+                    LEFT JOIN UserPoints up ON up.BookId = b.Id
+                    LEFT JOIN AuthorScores ascr ON ascr.AuthorId = b.AuthorId
+                    LEFT JOIN CategoryScores cscr ON cscr.CategoryId = b.CategoryId
+                    LEFT JOIN PublisherScores pscr ON pscr.PublisherId = b.PublisherId
+                    {(filter.FilterType != FilterType.Recommended ?
+                     " Inner Join UserBooks ub on ub.BookId = b.Id " :
+                     "")}
                     WHERE 
-                    ((@UserMode = 0 and b.status = 0) or @UserMode = 1 ) and 
-                    (b.Title LIKE @SearchText or bf.Title LIKE @SearchText or a.Name LIKE @SearchText or c.Name LIKE @SearchText or p.Name LIKE @SearchText)
-                    GROUP BY 
-                        b.Id, b.Title, b.Price, b.DiscountPercent, b.PriceBeforeDiscount,
-                        b.CategoryId, b.PublisherId, b.AuthorId, b.Edition, b.Volume,
-                        b.ShortDescription, b.Details, b.CoverPhotoUrl, b.PdfUrl,
-                        b.PublishDate, b.RegisterDate, b.RegisteredBy, b.Status,
-                        p.Name, a.Name, c.Name, u.Id, u.FullName
+                        (@UserMode = 1 OR b.Status = 0)
+                        AND (
+                            b.Title LIKE @SearchText OR 
+                            a.Name LIKE @SearchText OR 
+                            c.Name LIKE @SearchText OR 
+                            p.Name LIKE @SearchText
+                        )
                     ORDER BY 
-                    (Sum(isnull(udb.Points,0)) + Sum(isnull(udb_f.Points,0)) + Sum(isnull(udb_a.Points,0)) + Sum(isnull(udb_c.Points,0)) + Sum(isnull(udb_p.Points,0))) desc,
-                    b.Title
-                    OFFSET @Offset ROWS
-                    FETCH NEXT @PageSize ROWS ONLY;";
+                        (ISNULL(up.TotalPoints, 0) + ISNULL(ascr.AuthPoints, 0) + 
+                         ISNULL(cscr.CatPoints, 0) + ISNULL(pscr.PubPoints, 0)) DESC,
+                        b.Title
+                    OFFSET @Offset ROWS FETCH NEXT @PageSize ROWS ONLY;";
 
             var parameters = new DynamicParameters();
             int offset = (filter.PageNumber - 1) * filter.PageSize;
@@ -110,15 +116,35 @@ namespace PDFLibrary.Controllers
             parameters.Add("SearchText", $"%{filter.Search}%");
             parameters.Add("Offset", offset);
             parameters.Add("PageSize", filter.PageSize);
-
             var Books = await connection.QueryAsync<BookListItemViewModel>(sql, parameters);
 
-            var countSql = "select count(*) from Books WHERE Title LIKE @SearchText";
+            var countSql = $@"With 
+                            UserBooks as (
+                                    SELECT distinct BookId FROM UserFavourites WHERE UserId = @UserId
+                                    {(filter.FilterType == FilterType.Self ?
+                                    @"UNION ALL
+                                    SELECT distinct BookId FROM UserPayments WHERE UserId = @UserId" :
+                                    "")}
+                                )
+                            select count(*) 
+                            from Books b
+                            {(filter.FilterType != FilterType.Recommended ?
+                             " Inner Join UserBooks ub on ub.BookId = b.Id " :
+                             "")}
+                            WHERE b.Title LIKE @SearchText";
             var count = await connection.QueryFirstAsync<int>(countSql, parameters);
 
-            return Ok(new BookListViewModel { Items = Books.ToList(), TotalCount = count });
-        }
+            var result = new BookListViewModel()
+            {
+                Items = Books.ToList(),
+                TotalCount = count,
+            };
 
+
+            return Ok(result);
+
+
+        }
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id, bool readMode)
         {
@@ -324,27 +350,39 @@ namespace PDFLibrary.Controllers
 
             return $"/uploads/{subFolder}/{fileName}";
         }
-        [HttpGet("purchased")]
-        public async Task<IActionResult> GetPurchasedBooks()
+        [HttpPost("process-payment")]
+        public async Task<IActionResult> ProcessPayment([FromBody] int bookId)
         {
-            var userIdClaim = _httpContextAccessor.HttpContext?.User.FindFirst("Id")?.Value;
-            if (string.IsNullOrEmpty(userIdClaim)) return Unauthorized();
-            int userId = int.Parse(userIdClaim);
-
+            var userId = int.Parse(_httpContextAccessor.HttpContext?.User.FindFirst("Id").Value);
             using var connection = _context.CreateConnection();
 
-            // This SQL joins Books with UserActions to find only purchased items
-            var sql = @"SELECT b.*, p.Name AS Publisher, a.Name AS Author, c.Name AS Category
-                FROM Books b
-                INNER JOIN UserActions ua ON b.Id = ua.BookId
-                INNER JOIN Publishers p ON p.Id = b.PublisherId
-                INNER JOIN Authors a ON a.Id = b.AuthorId
-                INNER JOIN Categories c ON c.Id = b.CategoryId
-                WHERE ua.UserId = @UserId AND ua.ActionType = 2
-                ORDER BY ua.ActionTime DESC";
+            // 1. Get book price for the 'Amount' column
+            var book = await connection.QueryFirstOrDefaultAsync<BookListItemViewModel>("SELECT * FROM Books WHERE Id = @Id", new { Id = bookId });
+            if (book == null) return NotFound();
 
-            var books = await connection.QueryAsync<BookListItemViewModel>(sql, new { UserId = userId });
-            return Ok(books);
+            // 2. Insert into UserPayments (Matching your DB schema image)
+            var paySql = @"INSERT INTO UserPayments 
+                   (BookId, UserId, Amount, PaymentAccount, PaymentType, PaymentRef, PaymentTime, Remarks) 
+                   VALUES 
+                   (@BookId, @UserId, @Amount, @Account, @Type, @Ref, GETUTCDATE(), @Remarks)";
+
+            await connection.ExecuteAsync(paySql, new
+            {
+                BookId = bookId,
+                UserId = userId,
+                Amount = book.Price,
+                Account = "Demo-Account-123", // Fake data
+                Type = 1,                     // e.g., 1 for Card
+                Ref = "REF-" + Guid.NewGuid().ToString().Substring(0, 8).ToUpper(),
+                Remarks = "Fake purchase for testing"
+            });
+
+            // 3. Keep UserActions updated (ActionType 2 = Paid) for your recommendation points
+            await connection.ExecuteAsync(@"INSERT INTO UserActions (UserId, BookId, ActionType, ActionTime) 
+                                   VALUES (@UserId, @BookId, 2, GETUTCDATE())",
+                                           new { UserId = userId, BookId = bookId });
+
+            return Ok(new { message = "Payment successful!" });
         }
     }
 }

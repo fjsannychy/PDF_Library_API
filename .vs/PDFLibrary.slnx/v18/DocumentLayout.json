@@ -3,16 +3,20 @@
   "WorkspaceRootPath": "D:\\AspDotNetCoreProject\\OnlinePdfLibraryApi\\PDF_Library_API\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{E6858CBA-6F58-273B-D72C-D6C65A608992}|PDFLibrary\\PDFLibrary.csproj|d:\\aspdotnetcoreproject\\onlinepdflibraryapi\\pdf_library_api\\pdflibrary\\controllers\\bookscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E6858CBA-6F58-273B-D72C-D6C65A608992}|PDFLibrary\\PDFLibrary.csproj|solutionrelative:pdflibrary\\controllers\\bookscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E6858CBA-6F58-273B-D72C-D6C65A608992}|PDFLibrary\\PDFLibrary.csproj|d:\\aspdotnetcoreproject\\onlinepdflibraryapi\\pdf_library_api\\pdflibrary\\models\\viewmodels\\booklistitemviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E6858CBA-6F58-273B-D72C-D6C65A608992}|PDFLibrary\\PDFLibrary.csproj|solutionrelative:pdflibrary\\models\\viewmodels\\booklistitemviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{E6858CBA-6F58-273B-D72C-D6C65A608992}|PDFLibrary\\PDFLibrary.csproj|d:\\aspdotnetcoreproject\\onlinepdflibraryapi\\pdf_library_api\\pdflibrary\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{E6858CBA-6F58-273B-D72C-D6C65A608992}|PDFLibrary\\PDFLibrary.csproj|solutionrelative:pdflibrary\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{E6858CBA-6F58-273B-D72C-D6C65A608992}|PDFLibrary\\PDFLibrary.csproj|d:\\aspdotnetcoreproject\\onlinepdflibraryapi\\pdf_library_api\\pdflibrary\\models\\viewmodels\\userprofileviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{E6858CBA-6F58-273B-D72C-D6C65A608992}|PDFLibrary\\PDFLibrary.csproj|solutionrelative:pdflibrary\\models\\viewmodels\\userprofileviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E6858CBA-6F58-273B-D72C-D6C65A608992}|PDFLibrary\\PDFLibrary.csproj|d:\\aspdotnetcoreproject\\onlinepdflibraryapi\\pdf_library_api\\pdflibrary\\controllers\\bookscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E6858CBA-6F58-273B-D72C-D6C65A608992}|PDFLibrary\\PDFLibrary.csproj|solutionrelative:pdflibrary\\controllers\\bookscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{E6858CBA-6F58-273B-D72C-D6C65A608992}|PDFLibrary\\PDFLibrary.csproj|d:\\aspdotnetcoreproject\\onlinepdflibraryapi\\pdf_library_api\\pdflibrary\\models\\viewmodels\\bookdetailsviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -26,60 +30,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 6,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "UsersController.cs",
-              "DocumentMoniker": "D:\\AspDotNetCoreProject\\OnlinePdfLibraryApi\\PDF_Library_API\\PDFLibrary\\Controllers\\UsersController.cs",
-              "RelativeDocumentMoniker": "PDFLibrary\\Controllers\\UsersController.cs",
-              "ToolTip": "D:\\AspDotNetCoreProject\\OnlinePdfLibraryApi\\PDF_Library_API\\PDFLibrary\\Controllers\\UsersController.cs",
-              "RelativeToolTip": "PDFLibrary\\Controllers\\UsersController.cs",
-              "ViewState": "AgIAAD4AAAAAAAAAAAAswFIAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-12T11:56:59.405Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "UserProfileViewModel.cs",
-              "DocumentMoniker": "D:\\AspDotNetCoreProject\\OnlinePdfLibraryApi\\PDF_Library_API\\PDFLibrary\\Models\\ViewModels\\UserProfileViewModel.cs",
-              "RelativeDocumentMoniker": "PDFLibrary\\Models\\ViewModels\\UserProfileViewModel.cs",
-              "ToolTip": "D:\\AspDotNetCoreProject\\OnlinePdfLibraryApi\\PDF_Library_API\\PDFLibrary\\Models\\ViewModels\\UserProfileViewModel.cs",
-              "RelativeToolTip": "PDFLibrary\\Models\\ViewModels\\UserProfileViewModel.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAABQAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-12T11:53:48.833Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "BookDetailsViewModel.cs",
-              "DocumentMoniker": "D:\\AspDotNetCoreProject\\OnlinePdfLibraryApi\\PDF_Library_API\\PDFLibrary\\Models\\ViewModels\\BookDetailsViewModel.cs",
-              "RelativeDocumentMoniker": "PDFLibrary\\Models\\ViewModels\\BookDetailsViewModel.cs",
-              "ToolTip": "D:\\AspDotNetCoreProject\\OnlinePdfLibraryApi\\PDF_Library_API\\PDFLibrary\\Models\\ViewModels\\BookDetailsViewModel.cs",
-              "RelativeToolTip": "PDFLibrary\\Models\\ViewModels\\BookDetailsViewModel.cs",
-              "ViewState": "AgIAABoAAAAAAAAAAAA4wB8AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-12T11:01:44.775Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "BooksController.cs",
-              "DocumentMoniker": "D:\\AspDotNetCoreProject\\OnlinePdfLibraryApi\\PDF_Library_API\\PDFLibrary\\Controllers\\BooksController.cs",
-              "RelativeDocumentMoniker": "PDFLibrary\\Controllers\\BooksController.cs",
-              "ToolTip": "D:\\AspDotNetCoreProject\\OnlinePdfLibraryApi\\PDF_Library_API\\PDFLibrary\\Controllers\\BooksController.cs",
-              "RelativeToolTip": "PDFLibrary\\Controllers\\BooksController.cs",
-              "ViewState": "AgIAAEQBAAAAAAAAAAAswFsBAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-12T07:45:27.268Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
@@ -87,6 +39,67 @@
             {
               "$type": "Bookmark",
               "Name": "ST:129:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "BookListItemViewModel.cs",
+              "DocumentMoniker": "D:\\AspDotNetCoreProject\\OnlinePdfLibraryApi\\PDF_Library_API\\PDFLibrary\\Models\\ViewModels\\BookListItemViewModel.cs",
+              "RelativeDocumentMoniker": "PDFLibrary\\Models\\ViewModels\\BookListItemViewModel.cs",
+              "ToolTip": "D:\\AspDotNetCoreProject\\OnlinePdfLibraryApi\\PDF_Library_API\\PDFLibrary\\Models\\ViewModels\\BookListItemViewModel.cs",
+              "RelativeToolTip": "PDFLibrary\\Models\\ViewModels\\BookListItemViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-13T14:26:43.374Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "UsersController.cs",
+              "DocumentMoniker": "D:\\AspDotNetCoreProject\\OnlinePdfLibraryApi\\PDF_Library_API\\PDFLibrary\\Controllers\\UsersController.cs",
+              "RelativeDocumentMoniker": "PDFLibrary\\Controllers\\UsersController.cs",
+              "ToolTip": "D:\\AspDotNetCoreProject\\OnlinePdfLibraryApi\\PDF_Library_API\\PDFLibrary\\Controllers\\UsersController.cs",
+              "RelativeToolTip": "PDFLibrary\\Controllers\\UsersController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-12T11:56:59.405Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "UserProfileViewModel.cs",
+              "DocumentMoniker": "D:\\AspDotNetCoreProject\\OnlinePdfLibraryApi\\PDF_Library_API\\PDFLibrary\\Models\\ViewModels\\UserProfileViewModel.cs",
+              "RelativeDocumentMoniker": "PDFLibrary\\Models\\ViewModels\\UserProfileViewModel.cs",
+              "ToolTip": "D:\\AspDotNetCoreProject\\OnlinePdfLibraryApi\\PDF_Library_API\\PDFLibrary\\Models\\ViewModels\\UserProfileViewModel.cs",
+              "RelativeToolTip": "PDFLibrary\\Models\\ViewModels\\UserProfileViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAABQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-12T11:53:48.833Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "BookDetailsViewModel.cs",
+              "DocumentMoniker": "D:\\AspDotNetCoreProject\\OnlinePdfLibraryApi\\PDF_Library_API\\PDFLibrary\\Models\\ViewModels\\BookDetailsViewModel.cs",
+              "RelativeDocumentMoniker": "PDFLibrary\\Models\\ViewModels\\BookDetailsViewModel.cs",
+              "ToolTip": "D:\\AspDotNetCoreProject\\OnlinePdfLibraryApi\\PDF_Library_API\\PDFLibrary\\Models\\ViewModels\\BookDetailsViewModel.cs",
+              "RelativeToolTip": "PDFLibrary\\Models\\ViewModels\\BookDetailsViewModel.cs",
+              "ViewState": "AgIAABoAAAAAAAAAAAA4wB8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-12T11:01:44.775Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "BooksController.cs",
+              "DocumentMoniker": "D:\\AspDotNetCoreProject\\OnlinePdfLibraryApi\\PDF_Library_API\\PDFLibrary\\Controllers\\BooksController.cs",
+              "RelativeDocumentMoniker": "PDFLibrary\\Controllers\\BooksController.cs",
+              "ToolTip": "D:\\AspDotNetCoreProject\\OnlinePdfLibraryApi\\PDF_Library_API\\PDFLibrary\\Controllers\\BooksController.cs",
+              "RelativeToolTip": "PDFLibrary\\Controllers\\BooksController.cs",
+              "ViewState": "AgIAAHIBAAAAAAAAAAAswHYBAABBAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-12T07:45:27.268Z",
+              "EditorCaption": ""
             }
           ]
         }

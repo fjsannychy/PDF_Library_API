@@ -559,11 +559,33 @@
         }
       }
     },
-    "/api/Books/purchased": {
-      "get": {
+    "/api/Books/process-payment": {
+      "post": {
         "tags": [
           "Books"
         ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "integer",
+                "format": "int32"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "integer",
+                "format": "int32"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "OK"

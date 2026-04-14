@@ -320,12 +320,18 @@
   },
   {
     "ContainingType": "PDFLibrary.Controllers.BooksController",
-    "Method": "GetPurchasedBooks",
-    "RelativePath": "api/Books/purchased",
-    "HttpMethod": "GET",
+    "Method": "ProcessPayment",
+    "RelativePath": "api/Books/process-payment",
+    "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
-    "Parameters": [],
+    "Parameters": [
+      {
+        "Name": "bookId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
     "ReturnTypes": []
   },
   {
